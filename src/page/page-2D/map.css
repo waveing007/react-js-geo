@@ -1,0 +1,54 @@
+.bg-content {
+  background: #f3f3fb !important;
+  /* position: relative; */
+  /* width: 100%; */
+  /* height: 100vh; */
+}
+.cardContent {
+  padding: 30px;
+  width: 100%;
+  background: #fff;
+  border-radius: 20px !important;
+  margin: 20px 40px 20px 40px;
+}
+
+.card-content {
+  height: 93vh;
+  border-radius: 20px !important;
+}
+
+body {
+  font-family: "Kanit", sans-serif;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 80vh;
+}
+
+.container-map{
+  margin: 0px 0px 0px 0px !important;
+  padding: 20px !important;
+}
+.map-padding{
+  padding: 30px !important;
+}
+
+.dataContent{
+  /* width: 100vh !important; */  
+  margin-left: 5% !important;
+}
+
+.font-label-header{
+  font-size: 16px;
+  color: #b7b7bd;
+  font-weight: 500;
+}
+
+.clearMargin{
+  margin: 0px 0px 0px 0px !important;
+}
+
+.map-content{
+  padding: 0px 50px 0px 50px !important;
+}

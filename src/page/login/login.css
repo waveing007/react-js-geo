@@ -1,0 +1,96 @@
+.bg {
+  background-image: url(../../assets/img/img.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* height: 969px; */
+  height: 969px;
+  width: 100%;
+  /* filter: contrast(55%); */
+}
+
+.card-login-content {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  opacity: 0.9;
+}
+
+.card-login-login {
+  height: 760px !important;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  opacity: 0.9;
+}
+
+p {
+  font-family: Roboto;
+}
+
+.font-h1 {
+  font-family: Roboto;
+  font-size: 24px;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.font-h2 {
+  font-family: Roboto;
+  font-size: 22px;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+.font-16 {
+  font-family: Roboto;
+  font-size: 16px;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.font-version {
+  color: rgba(169, 169, 169, 1);
+  display: block;
+  align-items: center;
+  text-align: end;
+}
+
+.container-login {
+  /* margin-left: 50px !important;
+    margin-right: 50px !important; */
+
+  padding: 100px;
+}
+
+.font-content {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.logoUP {
+  height: 250px;
+  width: 250px;
+  background-image: url(../../assets/img/logoUP.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+.img-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-login {
+  background: #844a9d !important;
+  color: #fff !important;
+  width: 300px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 30px !important;
+}

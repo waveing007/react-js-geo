@@ -1,10 +1,37 @@
 import "./map.css";
 import $ from "jquery";
-import React from "react";
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import React, { useState } from "react";
+import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
+import L from "leaflet";
+import icon from "./constants";
+import "leaflet/dist/leaflet.css";
 
 
 function Map2D() {
+  // var mapMark = {};
+  const [mapMark, setMapMark] = useState({});
+  const [mapLat, setMapLat] = useState('');
+  const [mapLng, setMapLng] = useState('');
+
+
+  function MyComponent() {
+    const map = useMapEvents({
+      click: (e) => {
+        const { lat, lng } = e.latlng;
+        console.log(mapMark);
+        if (mapMark != undefined) {
+          map.removeLayer(mapMark);
+        }
+        setMapMark(L.marker([lat, lng], { icon }).addTo(map).bindPopup('Latitude : ' + lat.toFixed(6) + '\n' +'Longitude : ' + lng.toFixed(6)).openPopup());
+        console.log(lat, lng);
+        setMapLat(lat.toFixed(6));
+        setMapLng(lng.toFixed(6));
+      }
+    });
+    return null;
+  }
+
+
 
   return (
     <>
@@ -25,11 +52,11 @@ function Map2D() {
                 </div>
                 <div className='col'>
                   <label for='latitude' className='font-label-header'>Latitude</label>
-                  <h3 id='latitude'>162.651515</h3>
+                  <h3 id='latitude'>{mapLat}</h3>
                 </div>
                 <div className='col'>
                   <label for='LongTitude' className='font-label-header'>Longitude</label>
-                  <h3 id='LongTitude'>184.161611</h3>
+                  <h3 id='LongTitude'>{mapLng}</h3>
                 </div>
                 <div className='col'>
                   <label className='font-label-header'>Deep</label>
@@ -40,11 +67,12 @@ function Map2D() {
           </div>
         </div>
         <div className='row clearMargin map-content' >
-          <MapContainer center={[19.02580, 99.89765]} zoom={18} >
+          <MapContainer center={[19.02580, 99.89765]} zoom={18}  >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright%22%3EOpenStreetMap</a> contributors'
             />
+            <MyComponent />
           </MapContainer>
         </div>
       </div>

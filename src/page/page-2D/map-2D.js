@@ -5,33 +5,37 @@ import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import L from "leaflet";
 import icon from "./constants";
 import "leaflet/dist/leaflet.css";
+import axios from 'axios';
 
 
-function Map2D() {
+var dataMap;
+export default function Map2D() {
+  if (!dataMap) callAPiDataMap();
   // var mapMark = {};
   const [mapMark, setMapMark] = useState({});
   const [mapLat, setMapLat] = useState('');
   const [mapLng, setMapLng] = useState('');
 
-
   function MyComponent() {
     const map = useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
-        console.log(mapMark);
         if (mapMark != undefined) {
           map.removeLayer(mapMark);
         }
-        setMapMark(L.marker([lat, lng], { icon }).addTo(map).bindPopup('Latitude : ' + lat.toFixed(6) + '\n' +'Longitude : ' + lng.toFixed(6)).openPopup());
-        console.log(lat, lng);
+        setMapMark(L.marker([lat, lng], { icon }).addTo(map).bindPopup('Latitude : ' + lat.toFixed(6) + '\n' + 'Longitude : ' + lng.toFixed(6)).openPopup());
         setMapLat(lat.toFixed(6));
         setMapLng(lng.toFixed(6));
+        console.log(lat.toFixed(6), lng.toFixed(6));
+        dataMap.forEach(element => {
+          if (element.latitude == lat.toFixed(6) && element.longitude == lng.toFixed(6)) {
+            console.log('check');
+          }
+        });
       }
     });
     return null;
   }
-
-
 
   return (
     <>
@@ -77,9 +81,12 @@ function Map2D() {
         </div>
       </div>
     </>
-
-
   );
 }
 
-export default Map2D;
+const callAPiDataMap = () => {
+  axios.get('http://localhost:4200/map-data').then((res) => {
+    console.log(res.data);
+    dataMap = res.data.data;
+  })
+}

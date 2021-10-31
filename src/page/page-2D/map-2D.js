@@ -1,5 +1,4 @@
 import "./map.css";
-import $ from "jquery";
 import React, { useState } from "react";
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import L from "leaflet";
@@ -8,30 +7,57 @@ import "leaflet/dist/leaflet.css";
 import axios from 'axios';
 
 
-var dataMap;
 export default function Map2D() {
-  if (!dataMap) callAPiDataMap();
-  // var mapMark = {};
+
   const [mapMark, setMapMark] = useState({});
   const [mapLat, setMapLat] = useState('');
   const [mapLng, setMapLng] = useState('');
+  const [deep, setDeep] = useState('');
+  const [changYearMs, setChangYearMs] = useState('');
+
+  const year = [
+    { year: '2560' },
+    { year: '2561' },
+    { year: '2562' },
+    { year: '2564' },
+    { year: '2565' },
+    { year: '2566' }
+  ]
+
+  function SetChangYearMs(event) {
+    setChangYearMs(event.target.value);
+  }
+
+  function DynamicYear({ year }) {
+    return (
+      year.map((item, index) =>
+        <option key={index} id={index} value={item.year}>
+          {item.year}
+        </option>)
+    );
+  }
 
   function MyComponent() {
     const map = useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
-        if (mapMark != undefined) {
+        if (mapMark !== undefined) {
           map.removeLayer(mapMark);
         }
-        setMapMark(L.marker([lat, lng], { icon }).addTo(map).bindPopup('Latitude : ' + lat.toFixed(6) + '\n' + 'Longitude : ' + lng.toFixed(6)).openPopup());
-        setMapLat(lat.toFixed(6));
-        setMapLng(lng.toFixed(6));
-        console.log(lat.toFixed(6), lng.toFixed(6));
-        dataMap.forEach(element => {
-          if (element.latitude == lat.toFixed(6) && element.longitude == lng.toFixed(6)) {
-            console.log('check');
+        setMapMark(L.marker([lat, lng], { icon }).addTo(map).bindPopup('Latitude : ' + lat.toFixed(5) + ' Longitude : ' + lng.toFixed(5)).openPopup());
+        setMapLat(lat.toFixed(5));
+        setMapLng(lng.toFixed(5));
+        console.log(lat.toFixed(5), lng.toFixed(5));
+
+        const data = { lat: lat.toFixed(5), lng: lng.toFixed(5), year: changYearMs }
+        axios.post('http://localhost:4200/find-data-by-id', data).then((res) => {
+          console.log(res.data);
+          if (res.data.length !== 0) {
+            setDeep(res.data[0].deep);
+          } else {
+            setDeep('-');
           }
-        });
+        })
       }
     });
     return null;
@@ -45,26 +71,22 @@ export default function Map2D() {
             <div className='col-12'>
               <div className='row dataContent' >
                 <div className='col'>
-                  <label for='selectYear' className='font-label-header'>Year</label>
-                  <select className='form-control' id='selectYear' style={{ width: 200 }}>
-                    <option>2564</option>
-                    <option>2563</option>
-                    <option>2562</option>
-                    <option>2561</option>
-                    <option>2560</option>
+                  <label className='font-label-header'>Year</label>
+                  <select className='form-control' id='selectYear' style={{ width: 200 }} value={changYearMs} onChange={SetChangYearMs}>
+                    <DynamicYear year={year} />
                   </select>
                 </div>
                 <div className='col'>
-                  <label for='latitude' className='font-label-header'>Latitude</label>
+                  <label className='font-label-header'>Latitude</label>
                   <h3 id='latitude'>{mapLat}</h3>
                 </div>
                 <div className='col'>
-                  <label for='LongTitude' className='font-label-header'>Longitude</label>
+                  <label className='font-label-header'>Longitude</label>
                   <h3 id='LongTitude'>{mapLng}</h3>
                 </div>
                 <div className='col'>
                   <label className='font-label-header'>Deep</label>
-                  <h3>29.30m</h3>
+                  <h3>{deep}</h3>
                 </div>
               </div>
             </div>
@@ -84,9 +106,10 @@ export default function Map2D() {
   );
 }
 
-const callAPiDataMap = () => {
-  axios.get('http://localhost:4200/map-data').then((res) => {
-    console.log(res.data);
-    dataMap = res.data.data;
-  })
-}
+
+
+// const callAPiDataMap = () => {
+//   axios.get('http://localhost:4200/map-data').then((res) => {
+//     console.log(res.data);
+//   })
+// }

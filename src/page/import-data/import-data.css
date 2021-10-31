@@ -1,0 +1,92 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-data {
+  /* margin: 20px 50px 20px 50px !important; */
+  padding: 20px 50px 20px 50px !important;
+  width: 80% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.col-table {
+  width: 300px;
+}
+
+.dragAndDrop {
+  width: 100% !important;
+  height: 80vh !important;
+}
+
+.bg-upload {
+  background-color: #f0f0f0;
+  /* height: 80vh; */
+  border-radius: 15px;
+}
+
+.bg-import-page {
+  padding: 50px;
+}
+
+.container-upload {
+  display: flex;
+  justify-content: center;
+  padding: 11em;
+  flex-direction: column;
+  align-items: center;
+}
+.text-not-data {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.detail-text {
+  font-weight: 400;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.btn-upload {
+  margin-top: 20px;
+}
+
+.col-file-upload {
+  padding: 15px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-file-upload {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 15px;
+  padding: 20px;
+}
+
+.text-header-modal {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.text-content-modal {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.btn {
+  width: 200px;
+}
+
+.text-header {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+}

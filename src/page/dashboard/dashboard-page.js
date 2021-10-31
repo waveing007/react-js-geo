@@ -1,7 +1,4 @@
-import Sidebar from "../side-bar-page/side-bar-page";
 import './dashboard-page.css';
-
-
 
 const Dashboard = () => {
     return (

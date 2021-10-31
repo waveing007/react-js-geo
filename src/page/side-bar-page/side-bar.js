@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import List from "@material-ui/core/List";
@@ -20,6 +20,7 @@ import './side-bar-page.css';
 import { Route, Link } from "react-router-dom";
 import Login from './../login/login';
 import Map2D from "../page-2D/map-2D";
+import ImportDataPage from '../import-data/import-data'
 
 const drawerWidth = 300;
 
@@ -87,12 +88,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SiderBar() {
     const classes = useStyles();
-    const theme = useTheme();
+    // const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+    // const handleDrawerOpen = () => {
+    //     setOpen(true);
+    // };
 
     const handleDrawerClose = () => {
         open ? setOpen(false) : setOpen(true);
@@ -166,7 +167,7 @@ export default function SiderBar() {
                             <ListItemText primary={'3D'} />
                         </ListItem>
                     </Link>
-                    <Link to='/map2D'>
+                    <Link to='/importDataPage'>
                         <ListItem button key={'importData'} className="iconSide" style={{ marginTop: 50 }}>
                             <ListItemIcon>
                                 <ImportExportRoundedIcon style={{ fontSize: 38 }} />
@@ -185,6 +186,7 @@ export default function SiderBar() {
                 <Route exact path="/"><Login /></Route>
                 <Route path="/dashboard"><Dashboard /></Route>
                 <Route path="/map2D"><Map2D /></Route>
+                <Route path="/importDataPage"><ImportDataPage /></Route>
             </main>
         </div>
     );
